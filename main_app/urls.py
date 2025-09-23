@@ -24,6 +24,7 @@ urlpatterns = [
     path('books/', include('books.urls')),  
     path('tour/', include('tour.urls')),  
     path('', RedirectView.as_view(url='/books/', permanent=False)),
+    path('basket/', include('basket.urls'))
       
   
 ]

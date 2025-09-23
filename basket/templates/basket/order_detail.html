@@ -1,0 +1,7 @@
+<h2>Заказ: {{ order.name }}</h2>
+<p>Телефон: {{ order.phone }}</p>
+<p>Номер карты: {{ order.card_number }}</p>
+<p>Статус: {{ order.status }}</p>
+<p>Книга: {{ order.book }}</p>
+<a href="{% url 'order_update' order.id %}">Изменить</a>
+<a href="{% url 'order_delete' order.id %}">Удалить</a>
