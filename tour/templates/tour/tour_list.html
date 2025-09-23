@@ -1,0 +1,14 @@
+<h1>Список туров</h1>
+<ul>
+  {% for tour in tours %}
+    <li><a href="{% url 'tour_detail' tour.pk %}">{{ tour.person.name }} - {{ tour.tour_name }}</a></li>
+  {% endfor %}
+</ul>
+<li>Экскурсия по горам</li>
+</ul>
+
+{% for tour in tours %}
+  <h3>{{ tour.name }} - {{ tour.date }}</h3>
+  <a href="{% url 'register_tour' tour.id %}">Записаться</a>
+{% endfor %}
+

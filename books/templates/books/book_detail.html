@@ -9,3 +9,12 @@
 <p>Цена: {{ book.price }}</p>
 <p>Описание: {{ book.description }}</p>
 <a href="{% url 'book_list' %}">Назад к списку книг</a>
+
+<h2>Отзывы:</h2>
+<ul>
+  {% for review in reviews %}
+    <li>{{ review.reviewer_name }} ({{ review.rating }}/5): {{ review.text }}</li>
+  {% empty %}
+    <li>Нет отзывов</li>
+  {% endfor %}
+</ul>

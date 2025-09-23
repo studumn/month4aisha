@@ -1,0 +1,3 @@
+<h1>{{ tour.person.name }} - {{ tour.tour_name }}</h1>
+<p>Дата регистрации: {{ tour.registered_at }}</p>
+<a href="{% url 'tour_register' tour.person.pk %}">Зарегистрироваться</a>
