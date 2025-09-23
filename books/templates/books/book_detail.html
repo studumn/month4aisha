@@ -1,0 +1,11 @@
+<h1>{{ book.title }}</h1>
+<p>Автор: {{ book.author }}</p>
+<p>Дата публикации: {{ book.published_date }}</p>
+<p>ISBN: {{ book.isbn }}</p>
+<p>Страницы: {{ book.pages }}</p>
+<p>Язык: {{ book.language }}</p>
+<p>Издатель: {{ book.publisher }}</p>
+<p>Жанр: {{ book.genre }}</p>
+<p>Цена: {{ book.price }}</p>
+<p>Описание: {{ book.description }}</p>
+<a href="{% url 'book_list' %}">Назад к списку книг</a>
