@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clothes List</title>
+</head>
+<body>
+    <h1>Список одежды</h1>
+
+    <div>
+        <a href="?tag=children">#Дети</a>
+        <a href="?tag=teenagers">#Подростки</a>
+        <a href="?tag=adults">#Взрослые</a>
+    </div>
+
+    <ul>
+        {% for item in clothes %}
+            <li>{{ item.name }} — теги: 
+                {% for tag in item.tags.all %}
+                    {{ tag.name }}
+                {% endfor %}
+            </li>
+        {% empty %}
+            <li>Одежда не найдена.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

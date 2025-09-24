@@ -1,6 +1,23 @@
-<h1>Список книг</h1>
+
+<form method="get" action="{% url 'book_list' %}">
+    <input type="text" name="q" value="{{ query }}" placeholder="Поиск книги">
+    <button type="submit">Найти</button>
+</form>
+
 <ul>
-  {% for book in books %}
-    <li><a href="{% url 'book_detail' book.pk %}">{{ book.title }} by {{ book.author }}</a></li>
+  {% for book in page_obj %}
+    <li>{{ book.title }} — {{ book.author }}</li>
   {% endfor %}
 </ul>
+
+<div>
+  {% if page_obj.has_previous %}
+    <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">Назад</a>
+  {% endif %}
+
+  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+  {% if page_obj.has_next %}
+    <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.next_page_number }}">Вперед</a>
+  {% endif %}
+</div>
