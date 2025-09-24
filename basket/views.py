@@ -1,39 +1,36 @@
-from django.shortcuts import render, redirect, get_object_or_404
+
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Order
 from .forms import OrderForm
 
-def order_list(request):
-    orders = Order.objects.all()
-    return render(request, 'basket/order_list.html', {'orders': orders})
 
-def order_detail(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    return render(request, 'basket/order_detail.html', {'order': order})
+class OrderListView(ListView):
+    model = Order
+    template_name = 'basket/order_list.html'
+    context_object_name = 'orders'
 
-def order_create(request):
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('order_list')
-    else:
-        form = OrderForm()
-    return render(request, 'basket/order_form.html', {'form': form})
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'basket/order_detail.html'
+    context_object_name = 'order'
 
-def order_update(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    if request.method == 'POST':
-        form = OrderForm(request.POST, instance=order)
-        if form.is_valid():
-            form.save()
-            return redirect('order_list')
-    else:
-        form = OrderForm(instance=order)
-    return render(request, 'basket/order_form.html', {'form': form})
 
-def order_delete(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    if request.method == 'POST':
-        order.delete()
-        return redirect('order_list')
-    return render(request, 'basket/order_confirm_delete.html', {'order': order})
+class OrderCreateView(CreateView):
+    model = Order
+    form_class = OrderForm
+    template_name = 'basket/order_form.html'
+    success_url = reverse_lazy('order_list')
+
+
+class OrderUpdateView(UpdateView):
+    model = Order
+    form_class = OrderForm
+    template_name = 'basket/order_form.html'
+    success_url = reverse_lazy('order_list')
+
+
+class OrderDeleteView(DeleteView):
+    model = Order
+    template_name = 'basket/order_confirm_delete.html'
+    success_url = reverse_lazy('order_list')

@@ -1,23 +1,19 @@
+from django.views.generic import ListView
+from .models import Book
 
-<form method="get" action="{% url 'book_list' %}">
-    <input type="text" name="q" value="{{ query }}" placeholder="Поиск книги">
-    <button type="submit">Найти</button>
-</form>
+class BookListView(ListView):
+    model = Book
+    template_name = 'books/book_list.html'  # твой шаблон
+    context_object_name = 'page_obj'        # используем page_obj, как у тебя в шаблоне
+    paginate_by = 5
 
-<ul>
-  {% for book in page_obj %}
-    <li>{{ book.title }} — {{ book.author }}</li>
-  {% endfor %}
-</ul>
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Book.objects.filter(title__icontains=query)
+        return Book.objects.all()
 
-<div>
-  {% if page_obj.has_previous %}
-    <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">Назад</a>
-  {% endif %}
-
-  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-
-  {% if page_obj.has_next %}
-    <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.next_page_number }}">Вперед</a>
-  {% endif %}
-</div>
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('q', '')
+        return context

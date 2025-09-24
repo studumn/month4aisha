@@ -1,16 +1,19 @@
-from django.shortcuts import render, get_object_or_404, redirect
+
+from django.views.generic import ListView, DetailView
+from django.shortcuts import get_object_or_404, render
 from .models import Person, TourRegistration, HorseTour
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 
 
-def tour_list(request):
-    tours = TourRegistration.objects.all()
-    return render(request, 'tour/tour_list.html', {'tours': tours})
+class TourListView(ListView):
+    model = TourRegistration  
+    template_name = 'tour/tour_list.html'
+    context_object_name = 'tours'
+    paginate_by = 5
 
-def tour_detail(request, pk):
-    tour = get_object_or_404(TourRegistration, pk=pk)
-    return render(request, 'tour/tour_detail.html', {'tour': tour})
+class TourDetailView(DetailView):
+    model = TourRegistration
+    template_name = 'tour/tour_detail.html'
+    context_object_name = 'tour'
 
 def tour_register(request, person_id):
     person = get_object_or_404(Person, pk=person_id)
@@ -26,5 +29,3 @@ def tour_register(request, person_id):
         'registration': registration,
         'message': message
     })
-
-
