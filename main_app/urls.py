@@ -13,9 +13,12 @@ urlpatterns = [
     path('register/', accounts_views.RegisterView.as_view(), name='register'),  
     path('login/', accounts_views.CustomLoginView.as_view(), name='login'),      
     path('logout/', accounts_views.CustomLogoutView.as_view(), name='logout'),   
+    path("accounts/", include("django.contrib.auth.urls")),   
     path('accounts/', include('accounts.urls')),               
     path('basket/', include('basket.urls')),                 
     path('captcha/', include('captcha.urls')),               
     path('tour/', include('tour.urls')),              
     path('clothes/', include('clothes.urls')),
+    path('cineboard/', include('cineboard.urls')),  
+    
 ]

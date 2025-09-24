@@ -1,0 +1,23 @@
+
+<a href="{% url 'movie_add' %}">Добавить фильм</a>
+
+{% block content %}
+<h1>Добавить фильм</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}
+
+<form method="get">
+    <input type="text" name="search" placeholder="Поиск по названию" value="{{ request.GET.search }}">
+    <select name="genre">
+        <option value="">Все жанры</option>
+        <option value="horror">Ужасы</option>
+        <option value="drama">Мелодрама</option>
+        <option value="comedy">Комедия</option>
+        <option value="action">Боевик</option>
+    </select>
+    <button type="submit">Фильтровать</button>
+</form>

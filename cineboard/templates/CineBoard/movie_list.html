@@ -1,0 +1,27 @@
+
+{% block content %}
+<h1>Список фильмов</h1>
+
+<form method="get">
+    <input type="text" name="search" placeholder="Поиск по названию" value="{{ request.GET.search }}">
+    <select name="genre">
+        <option value="">Все жанры</option>
+        <option value="horror">Ужасы</option>
+        <option value="drama">Мелодрама</option>
+        <option value="comedy">Комедия</option>
+        <option value="action">Боевик</option>
+    </select>
+    <button type="submit">Фильтровать</button>
+</form>
+
+<ul>
+    {% for movie in movies %}
+        <li>
+            <a href="{% url 'movie_detail' movie.pk %}">{{ movie.title }}</a>
+            — {{ movie.genre }} | рейтинг: {{ movie.rating }}
+        </li>
+    {% empty %}
+        <li>Фильмов нет</li>
+    {% endfor %}
+</ul>
+{% endblock %}

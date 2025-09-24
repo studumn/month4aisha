@@ -1,15 +1,23 @@
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from .forms import CustomUserCreationForm  
-from .models import CustomUser  
+from django.contrib.auth import login
+from .forms import CustomUserCreationForm
+from .models import CustomUser
 
 
 class RegisterView(CreateView):
-    model = CustomUser  
-    form_class = CustomUserCreationForm  
+    model = CustomUser
+    form_class = CustomUserCreationForm
     template_name = 'accounts/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('cineboard:list') 
+
+    def form_valid(self, form):
+        
+        response = super().form_valid(form)
+       
+        login(self.request, self.object)
+        return response
 
 
 class CustomLoginView(LoginView):

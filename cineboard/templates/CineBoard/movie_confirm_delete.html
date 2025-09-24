@@ -1,0 +1,13 @@
+
+{% block content %}
+
+<h1>Удалить фильм "{{ object.title }}"?</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить</button>
+    <a href="{% url 'movie_detail' object.pk %}">Отмена</a>
+</form>
+
+{% endblock %}
+x
