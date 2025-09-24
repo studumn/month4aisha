@@ -37,10 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',  
-    'books',
     'tour', 
-    'basket'                     
+    'basket',
+    'books',
+    'accounts',
+    'captcha',
 ]
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 
 MIDDLEWARE = [
@@ -140,3 +145,5 @@ TEMPLATES = [
         },
     },
 ]
+LOGIN_REDIRECT_URL = '/'      
+LOGOUT_REDIRECT_URL = '/login/' 

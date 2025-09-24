@@ -16,7 +16,7 @@ class Book(models.Model):
         return self.title
 
 class Review(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
+    # book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
     reviewer_name = models.CharField(max_length=100)
     text = models.TextField()
     rating = models.IntegerField(default=5)

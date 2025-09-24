@@ -1,6 +1,6 @@
 
 from django.db import models
-from books.models import Book  # если используем таблицу книг
+# from books.models import Book 
 
 STATUS_CHOICES = [
     ('Выполнено', 'Выполнено'),
@@ -12,7 +12,6 @@ class Order(models.Model):
     phone = models.CharField(max_length=20)
     card_number = models.CharField(max_length=20)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Не выполнено')
-    book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True, blank=True)  # доп задание
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

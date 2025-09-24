@@ -1,0 +1,23 @@
+<!-- accounts/templates/accounts/register.html -->
+<h2>Регистрация</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.username.label_tag }} {{ form.username }}
+    {{ form.email.label_tag }} {{ form.email }}
+    {{ form.phone_number.label_tag }} {{ form.phone_number }}
+    {{ form.date_of_birth.label_tag }} {{ form.date_of_birth }}
+    {{ form.address.label_tag }} {{ form.address }}
+    {{ form.position_applied.label_tag }} {{ form.position_applied }}
+    {{ form.resume_link.label_tag }} {{ form.resume_link }}
+    {{ form.education.label_tag }} {{ form.education }}
+    {{ form.experience_years.label_tag }} {{ form.experience_years }}
+    {{ form.skills.label_tag }} {{ form.skills }}
+    {{ form.linkedin_profile.label_tag }} {{ form.linkedin_profile }}
+    {{ form.portfolio_link.label_tag }} {{ form.portfolio_link }}
+    {{ form.password1.label_tag }} {{ form.password1 }}
+    {{ form.password2.label_tag }} {{ form.password2 }}
+
+    {{ form.captcha.label_tag }} {{ form.captcha }}
+
+    <button type="submit">Зарегистрироваться</button>
+</form>

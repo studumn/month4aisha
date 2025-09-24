@@ -16,15 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import RedirectView
-
+from accounts import views as accounts_views  # Импортируем views из accounts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('books/', include('books.urls')),  
-    path('tour/', include('tour.urls')),  
-    path('', RedirectView.as_view(url='/books/', permanent=False)),
-    path('basket/', include('basket.urls'))
-      
-  
+    path('', accounts_views.register_view, name='register'),  # Корень сразу ведёт на регистрацию
+    path('accounts/', include('accounts.urls')),               # Авторизация, профиль и т.д.
+    path('basket/', include('basket.urls')),                  # Если нужно
+    path('captcha/', include('captcha.urls')),                # Если нужно
+    path('tour/', include('tour.urls')),                      # Если нужно
 ]
